@@ -1,6 +1,6 @@
 // Config file for game
 const config = {
-    width: 800,
+    width: 700,
     height: 400,
     type: Phaser.AUTO,
       physics: {
@@ -9,11 +9,16 @@ const config = {
         gravity: {y: 0},
       // use this to debug physics in system. Don't forget to add comma to conitnue statements
         //debug: true
-}},
+        }
+    },
     scene: {
       preload: preload,
       create: create,
       update: update,
+    },
+    scale: {
+      mode: Phaser.Scale.FIT,
+      autocenter: Phaser.Scale.CENTER_ALL
     }
 };
 // Global variables    
@@ -23,14 +28,22 @@ const game = new Phaser.Game(config);
 
 function preload() {
   console.log("hello");
+  //game.scale.SHOW_ALL;
+  game.scale.pageAlignHorizontally = true;
+  game.scale.pageAlignVertically = true;
 };
 
 function create() {
   this.graphics = this.add.graphics({ lineStyle: {color: 0xFFFFFF, width: 5}, fillStyle: {color: 0xFFFFFF, alpha: 1} });
   this.arcs = this.add.graphics({ lineStyle: {color: 0x000000, width: 3}, fillStyle: {color: 0x000000, alpha: 1} });  
   this.control = this.add.graphics({ lineStyle: {color: 0x00ff55, width: 1}});
+  this.red = this.add.graphics({lineStyle: {color: 0xFF0000, width: 5}, fillStyle: {color:0xFF0000, alpha: 1} });
+  this.blue = this.add.graphics({lineStyle: {color: 0x0000FF, width: 5}, fillStyle: {color:0x0000FF, alpha: 1} });
+  // Re create tool bars as interactives. use .setInteractive();
+  // Create invert button this way as well
   // create control bar
-  this.controller = new Phaser.Geom.Line(50,100,70,100);
+  // 
+  this.controller = new Phaser.Geom.Line(50,100,70,100)
   this.divisionsBar = new Phaser.Geom.Line(90,100,110,100);
   this.lengthBar = new Phaser.Geom.Line(75,10,75,30);
   // turn on inputs
@@ -39,6 +52,15 @@ function create() {
   this.speedDial = new Phaser.Geom.Line(60,50,60,250);
   this.divisionsDial = new Phaser.Geom.Line(100,50,100,250);
   this.lengthDial= new Phaser.Geom.Line(50,20,250,20);
+  // Draw inverting buttons
+  //text draws and outputs but variable isn't stored globally.
+//   this.iSpeed = 1;
+//   this.speedButton = this.add.text(100, 75, 'Reverse Speed')
+//                   .setInteractive()
+//                   .on('pointerdown', () => this.iSpeed++)
+//                   // .on('pointerover', () => this.speedButton.setStyle( {fill: #AAAAAA} )) 
+//                   // .on('pointerout', () => this.speedButton.setStyle( {fill: #FFFFFF } ));
+  console.log(this.conText);
 };
 
 //commented out until I want to work more on inputs
@@ -66,13 +88,14 @@ function onPointerDown(pointer)  {
   // this.y = pointer.y;
   // Check to make sure clicked on bar. 
   this.input.on('pointermove', onPointerMove, this);
+  
 
   console.log('down', pointer.x, ", ", pointer.y);
 }
 
 function onPointerUp(pointer) {
   this.input.off('pointermove', onPointerMove, this); 
-  console.log('up ', pointer.x, ", ", pointer.y);
+  console.log('up ', pointer.x, ", ", pointer.y, ", ", this.iSpeed);
 }
 
 function spin() {  
@@ -83,10 +106,6 @@ function spin() {
   // Draw arcs  
   for(var i=0; i<3; i++){
   
-  // Use these variables for adjustable portions
-  var r1, r2, r3;
-  var ang1, ang2, ang3;
-    
   //Draw first set of 3 arcs
   this.graphics.beginPath();
   this.graphics.arc(
@@ -192,9 +211,7 @@ const time = +((new Date)*(this.y/200))%360;
   this.arcs.clear();
   //You must mention each one of these for them to clear. This could be useful in the future!
   
-  // Use these variables for adjustable portions
-  var r1, r2, r3;
-  var ang1, ang2, ang3;
+
   // Draw black arcs  
   //   for(var i=0;i<4;i++) {
   // this.arcs.beginPath();
@@ -281,17 +298,18 @@ function art() {
 };
 
 function controller() {
+  // graphics.clear runs in spin2. May want to move it to here and run controller first. It will be in all illusions probably?
+  //this.graphics.clear();
+  this.control.clear();
   this.graphics.strokeLineShape(this.controller);
   this.graphics.strokeLineShape(this.divisionsBar);
   this.graphics.strokeLineShape(this.lengthBar);
   this.control.strokeLineShape(this.speedDial);
   this.control.strokeLineShape(this.divisionsDial);
   this.control.strokeLineShape(this.lengthDial);
-
 };
 
 function update() {
-
   //spin.call(this);
   spin2.call(this);
   //art.call(this);
