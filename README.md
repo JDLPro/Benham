@@ -10,29 +10,23 @@ This project is to practice drawing different kinds of illusions with Phaser
         Current Features
           -- Length of arc
           -- Speed of disk
-          -- Amount of Arcs
+          -- Amount of Arcs (currently tied to spacing)
         Planned Features
           -- Invert direction
           -- Invert color
-Your Project
-------------
+          -- Spacing of arcs
 
-### ← README.md
+Author: Jemma Lofy
+Email: JDLofy@gmail.com
+On Glitch: @JDLofy
 
+Prototyping notes: 4-14-20
+--
+Try changing text color to not prime users with colors
 
+Load time issues - What gives? -- Seems like it was on Glitches side, but should try more things just to make sure.
 
-### ← index.html
-
-
-
-### ← style.css
-
-
-### ← script.js
-
-
-### ← assets
-
+Look into Github Pages for hosting of project/resume page
 
 Made by [Glitch](https://glitch.com/)
 -------------------

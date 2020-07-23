@@ -2,38 +2,80 @@
 <html lang="en">
   <head>
     <title>Benhams Disk</title>
+    <link rel="icon" href="https://cdn.glitch.com/e42fe98f-5518-4c7d-9a5b-4ad8a89a187d%2Fblackwhite_icon.jpg?v=1586384371591" samesite="none" secure>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css">
-    
-    <!-- import the webpage's javascript file -->
     <!-- import phaser 3.17 --> 
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.17.0/dist/phaser.min.js" defer></script>
-    <!-- import JS game -->
-    <script src="/script.js" defer></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.17.0/dist/phaser.min.js"></script>
   </head>  
   <body>
-    <h1>Welcome!</h1>
-    
-    <p>
-      This is my attempt at making a computer version of Benham's disk!
-    </p>
-    
-    <p>
-      Everything below is only black and white. Do you see any colors?
-    </p><p>
+<!--     adding responsive columns and elements https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_two_columns_responsive -->
+
+<div id="contentBox" style="margin:0px auto; width:100%">
+
+ <!-- columns divs, float left, no margin so there is no space between column, width=1/3 -->
+    <div id="column1">
+     <h1>Benham's Disk</h1>
+      <p>
+        Adjust the rotation speed and direction, as well as the amount of arcs!<br><br>
+        All colors are inside your mind. The disk is only black and white.<br><br>
+        Learn more about Benham's disk from the <a id="explo" href="https://www.exploratorium.edu/exhibits/benhams-disk">Exploratorium</a>
+      </p>
+<!--     <p>
+    What happens if we change how many lines there are, how far apart they are from one another, or how long the lines are? 
+    Do certain speeds make the effect better or worse for you? 
+      Using this virtual model you can explore some of these questions for yourself and share it with friends!
+What causes the colors we see with Benham's disk is unknown.
+This model uses JavaScript and Phaser 3.17.
+    <br><br>
+      Everything below is only black and white. What causes the colors some see with Benham's disk is completely unknown, with limited study.
+    <br><br>
+      Displaying it in a virtual setting presents a new set of challenges and also provides a means by which to explore some aspects of the phenomena.
       It is now possible to adjust the speed of the spinning disk! Just click and drag the white lever on the left.
-    </p><p>
+    <br><br>
       There is also a second white lever that controls how many black lines you see in the white spaecs. 
-      Different speeds and divisions will give you a lot of different results!
+      Different speeds and divisions may give you different results!
+    </p> -->
+  
+  <div>     
+    <p class="controls">
+      Rotation Speed
+      <div class="slidecontainer" id="rotatespeed">
+        <input type="range" min="0" max="45" value="1" class="slider" id="rspdrng"> <spac id="rspd"></spac> 
+      </div>
+    </p>
+    <p class="controls">
+      Arc Amount
+      <div class="slidecontainer" id="arcamount">
+        <input type="range" min="2" max="20" value="7" class="slider" id="arca"> <span id="arca"></span>
+      </div>
     </p>
 
+    </div>
+
+    <div id="column2">
+      <script src="/script.js" defer></script>
+    </div>
+      <div id="revspdcol">
+        <button id="revspd"> Reverse Direction </button>
+  </div>
+  </div>
+
+<!--     <div id="column3">
+     CONTENT
+    </div> -->
+</div>
+   
+    
+    
     <!-- include the Glitch button to show what the webpage is about and
           to make it easier for folks to view source and remix -->
     <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
     <script src="https://button.glitch.me/button.js"></script>
   </body>
 </html>
+
+
